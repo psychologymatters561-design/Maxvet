@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>MaxPetZ at Home | Premium Veterinary Care · South Delhi Since 1952</title>
+<meta name="description" content="South Delhi's most trusted home veterinary service. Expert vets visit your home in East of Kailash, GK1, GK2, Hauz Khas. Fear Free™ certified. 844 844 9955">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ─── TOKENS ─── */
+:root{
+  --ink:#0C1110; --ink70:rgba(12,17,16,.7); --ink40:rgba(12,17,16,.4); --ink15:rgba(12,17,16,.15);
+  --canvas:#F6F3EC; --paper:#FDFBF6; --white:#FFFFFF;
+  --t9:#052A27; --t7:#0C4A42; --t5:#17756A; --t3:#35AFA0; --t1:#C5EDE9;
+  --g5:#C6941A; --g3:#E2B444; --g1:#FBF0D6;
+  --blush:#F0E6DC; --rose:#E8D5C8;
+  --r: 8px; --rm:16px; --rl:24px; --rxl:32px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --pad-x:clamp(20px,5vw,72px);
+  --pad-sec:clamp(64px,10vw,120px);
+}
+
+/* ─── RESET ─── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--canvas);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:none;background:none}
+
+/* ─── CURSOR (desktop only) ─── */
+@media(pointer:fine){
+  body{cursor:none}
+  #cur-dot,#cur-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+  #cur-dot{width:7px;height:7px;background:var(--t5);transition:width .2s,height .2s,background .2s;mix-blend-mode:multiply}
+  #cur-ring{width:34px;height:34px;border:1.5px solid var(--t5);z-index:9998;transition:width .45s var(--ease-out),height .45s var(--ease-out),border-color .3s;opacity:.5}
+  .cur-big #cur-dot{width:13px!important;height:13px!important;background:var(--g3)!important}
+  .cur-big #cur-ring{width:54px!important;height:54px!important;border-color:var(--g3)!important;opacity:.35!important}
+}
+
+/* ─── SCROLL PROGRESS ─── */
+#sprog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--t5),var(--g3));z-index:9997;width:0%;transition:width .08s linear;pointer-events:none}
+
+/* ─── NAV ─── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:600;padding:22px var(--pad-x);display:flex;align-items:center;justify-content:space-between;gap:16px;transition:padding .45s var(--ease-out),background .45s,backdrop-filter .45s,box-shadow .4s}
+.nav.scrolled{padding:13px var(--pad-x);background:rgba(246,243,236,.95);backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(0,0,0,.06),0 6px 28px rgba(0,0,0,.05)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,1.85rem);font-weight:700;color:var(--t9);display:flex;align-items:center;gap:9px;flex-shrink:0}
+.nav-logo-cross{width:24px;height:24px;background:linear-gradient(135deg,var(--t5),var(--t3));border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.88rem;font-weight:700;box-shadow:0 3px 10px rgba(23,117,106,.35);transition:transform .4s var(--spring);flex-shrink:0}
+.nav-logo:hover .nav-logo-cross{transform:rotate(90deg) scale(1.1)}
+.nav-logo em{color:var(--g5);font-style:normal}
+.nav-links{display:flex;gap:clamp(18px,2.5vw,36px);list-style:none}
+.nav-links a{font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);position:relative;transition:color .3s}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1.5px;background:var(--t5);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease-out)}
+.nav-links a:hover{color:var(--t5)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-cta{background:var(--t9);color:#fff;padding:11px 22px;border-radius:100px;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:7px;transition:background .3s,transform .35s var(--spring),box-shadow .3s;box-shadow:0 4px 14px rgba(5,42,39,.28);white-space:nowrap;flex-shrink:0}
+.nav-cta:hover{background:var(--t5);transform:translateY(-2px);box-shadow:0 8px 22px rgba(5,42,39,.32)}
+/* Mobile hamburger */
+.ham{display:none;flex-direction:column;gap:5px;padding:6px;cursor:pointer;z-index:10}
+.ham span{width:22px;height:2px;background:var(--t9);border-radius:2px;transition:all .35s var(--ease-out);display:block}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--t9);z-index:590;flex-direction:column;align-items:center;justify-content:center;gap:32px;opacity:0;transition:opacity .35s var(--ease-out)}
+.mob-menu.open{opacity:1}
+.mob-menu a{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:#fff;letter-spacing:-.01em;transition:color .3s}
+.mob-menu a:hover{color:var(--g3)}
+.mob-menu-cta{background:linear-gradient(135deg,var(--g3),var(--g5));color:var(--t9)!important;padding:14px 36px;border-radius:100px;font-size:1rem!important;font-weight:700!important}
+.mob-close{position:absolute;top:24px;right:24px;font-size:1.5rem;color:#fff;cursor:pointer;padding:8px}
+
+/* ─── SECTION HELPERS ─── */
+.sec{padding:var(--pad-sec) var(--pad-x)}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--t5);margin-bottom:12px}
+.kicker::before{content:'';width:20px;height:1.5px;background:var(--t5);flex-shrink:0}
+.kicker.light{color:var(--t3)}
+.kicker.light::before{background:var(--t3)}
+.kicker.center{justify-content:center}
+.kicker.center::before{display:none}
+.kicker.center::after{content:'';width:20px;height:1.5px;background:var(--t5)}
+.kicker.light.center::after{background:var(--t3)}
+.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.6rem);font-weight:400;line-height:1.1;color:var(--ink)}
+.sh em{font-style:italic;color:var(--t5)}
+.sh strong{font-weight:700}
+.sh.white{color:#fff}
+.sh.white em{color:var(--g3)}
+.body-txt{font-size:clamp(.88rem,1.5vw,.97rem);line-height:1.8;color:var(--ink70)}
+.body-txt.white{color:rgba(255,255,255,.65)}
+.link-arr{display:inline-flex;align-items:center;gap:7px;font-size:.76rem;font-weight:600;color:var(--t5);transition:gap .3s}
+.link-arr:hover{gap:14px}
+.link-arr.white{color:var(--g3)}
+
+/* ─── REVEAL ─── */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .85s var(--ease-out),transform .85s var(--ease-out)}
+.rv-l{opacity:0;transform:translateX(-36px);transition:opacity .85s var(--ease-out),transform .85s var(--ease-out)}
+.rv-r{opacity:0;transform:translateX(36px);transition:opacity .85s var(--ease-out),transform .85s var(--ease-out)}
+.rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.d4{transition-delay:.28s}.d5{transition-delay:.35s}.d6{transition-delay:.42s}
+
+/* ─── BUTTONS ─── */
+.btn-primary{background:linear-gradient(135deg,var(--g3),var(--g5));color:var(--t9);padding:15px 32px;border-radius:100px;font-size:.88rem;font-weight:700;display:inline-flex;align-items:center;gap:9px;transition:transform .35s var(--spring),box-shadow .35s;box-shadow:0 7px 26px rgba(198,148,26,.4);position:relative;overflow:hidden;cursor:pointer;white-space:nowrap}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--g5),var(--g3));opacity:0;transition:opacity .3s}
+.btn-primary:hover::before{opacity:1}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 32px rgba(198,148,26,.5)}
+.btn-primary span{position:relative;z-index:1}
+.btn-outline-white{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.22);color:#fff;padding:15px 28px;border-radius:100px;font-size:.88rem;font-weight:500;display:inline-flex;align-items:center;gap:9px;transition:background .3s,transform .35s var(--spring);backdrop-filter:blur(8px);white-space:nowrap}
+.btn-outline-white:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
+.btn-teal{background:var(--t9);color:#fff;padding:15px 32px;border-radius:100px;font-size:.88rem;font-weight:600;display:inline-flex;align-items:center;gap:9px;transition:background .3s,transform .35s var(--spring),box-shadow .3s;box-shadow:0 5px 18px rgba(5,42,39,.28)}
+.btn-teal:hover{background:var(--t5);transform:translateY(-2px);box-shadow:0 10px 26px rgba(5,42,39,.32)}
+.btn-wa{background:#25D366;color:#fff;padding:14px 26px;border-radius:100px;font-size:.85rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:transform .35s var(--spring),box-shadow .35s;box-shadow:0 5px 18px rgba(37,211,102,.35)}
+.btn-wa:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(37,211,102,.45)}
+
+/* ─── FLOAT WA ─── */
+.wa-float{position:fixed;bottom:clamp(20px,4vw,32px);right:clamp(20px,4vw,32px);z-index:500;width:52px;height:52px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.45rem;box-shadow:0 5px 20px rgba(37,211,102,.4);transition:transform .3s var(--spring)}
+.wa-float:hover{transform:scale(1.12)}
+.wa-float-pulse{position:absolute;inset:-5px;border-radius:50%;border:2px solid #25D366;opacity:0;animation:waPulse 2.5s ease-out infinite}
+@keyframes waPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.65);opacity:0}}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+.hero{min-height:100dvh;background:var(--t9);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 75% 90% at 12% 55%,rgba(23,117,106,.55) 0%,transparent 58%),radial-gradient(ellipse 50% 60% at 88% 18%,rgba(198,148,26,.12) 0%,transparent 52%),radial-gradient(ellipse 38% 50% at 85% 82%,rgba(23,117,106,.2) 0%,transparent 50%);animation:meshPulse 14s ease-in-out infinite alternate;z-index:0}
+@keyframes meshPulse{0%{opacity:1}100%{opacity:.72;filter:hue-rotate(5deg)}}
+.hero-blob{position:absolute;width:clamp(300px,50vw,600px);height:clamp(300px,50vw,600px);top:5%;right:40%;background:radial-gradient(circle,rgba(53,175,160,.07) 0%,transparent 70%);border-radius:50%;animation:blobFloat 9s ease-in-out infinite;z-index:0;pointer-events:none}
+@keyframes blobFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-40px) scale(1.06)}}
+
+.hero-inner{flex:1;display:grid;grid-template-columns:55% 45%;position:relative;z-index:1;align-items:center}
+.hero-left{padding:clamp(100px,13vw,160px) var(--pad-x) clamp(60px,8vw,100px);display:flex;flex-direction:column;gap:0}
+
+/* Badge */
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:7px 16px;border-radius:100px;font-size:clamp(.62rem,.8vw,.72rem);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72);width:fit-content;margin-bottom:24px;opacity:0;transform:translateY(18px);animation:heroUp .85s .18s var(--ease-out) forwards}
+.hero-badge-dot{width:6px;height:6px;background:var(--g3);border-radius:50%;flex-shrink:0;animation:dotGlow 2s infinite}
+@keyframes dotGlow{0%,100%{box-shadow:0 0 0 0 rgba(226,180,68,.65)}50%{box-shadow:0 0 0 7px rgba(226,180,68,0)}}
+
+/* H1 */
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.8vw,5.8rem);font-weight:300;line-height:1.05;color:#fff;margin-bottom:20px;opacity:0;transform:translateY(26px);animation:heroUp .95s .34s var(--ease-out) forwards}
+.hero h1 strong{font-weight:700;display:block}
+.hero h1 em{font-style:italic;color:var(--g3);display:block}
+
+.hero-sub{font-size:clamp(.88rem,1.2vw,.98rem);line-height:1.82;color:rgba(255,255,255,.6);max-width:480px;margin-bottom:36px;opacity:0;transform:translateY(18px);animation:heroUp .85s .5s var(--ease-out) forwards}
+
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;opacity:0;transform:translateY(18px);animation:heroUp .85s .64s var(--ease-out) forwards}
+
+/* Stats strip */
+.hero-stats{display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:14px;overflow:hidden;width:fit-content;opacity:0;transform:translateY(18px);animation:heroUp .85s .8s var(--ease-out) forwards}
+.hstat{padding:16px clamp(14px,2.5vw,26px);text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+.hstat:last-child{border-right:none}
+.hstat-n{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,2.8vw,2rem);font-weight:700;color:var(--g3);display:block;line-height:1}
+.hstat-l{font-size:.6rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);display:block;margin-top:4px}
+
+/* Hero right — floating cards */
+.hero-right{display:flex;align-items:center;justify-content:center;padding:120px clamp(20px,4vw,52px) 80px 10px;position:relative}
+.hcards{position:relative;width:clamp(260px,28vw,340px);height:clamp(400px,45vw,520px)}
+.hring1,.hring2{position:absolute;border-radius:50%;border:1px solid rgba(53,175,160,.18);animation:ringPulse 3.6s ease-in-out infinite}
+.hring1{inset:-28px;animation-delay:0s}
+.hring2{inset:-56px;border-color:rgba(53,175,160,.08);animation-delay:.9s}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.04);opacity:1}}
+.hcard{position:absolute;border-radius:16px;padding:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(18px);color:#fff}
+.hcard-main{width:clamp(220px,22vw,290px);left:0;top:0;opacity:0;animation:cardIn .85s .58s var(--ease-out) forwards,cardFloat1 6.5s 1.5s ease-in-out infinite}
+.hcard-2{width:clamp(160px,17vw,210px);right:-18px;bottom:clamp(40px,6vw,60px);opacity:0;animation:cardIn .85s .78s var(--ease-out) forwards,cardFloat2 7.5s 1.8s ease-in-out infinite}
+.hcard-3{width:clamp(130px,13vw,170px);right:10px;top:clamp(20px,3vw,36px);opacity:0;animation:cardIn .85s .98s var(--ease-out) forwards,cardFloat3 5.5s 2s ease-in-out infinite;text-align:center;padding:16px}
+@keyframes cardIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardFloat1{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-18px) rotate(0deg)}}
+@keyframes cardFloat2{0%,100%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-13px) rotate(.5deg)}}
+@keyframes cardFloat3{0%,100%{transform:translateY(0) rotate(1.5deg)}50%{transform:translateY(-10px) rotate(0)}}
+.hcard-icon{font-size:1.8rem;display:block;margin-bottom:10px}
+.hcard-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;margin-bottom:5px}
+.hcard-sub{font-size:.7rem;color:rgba(255,255,255,.55);line-height:1.5}
+.hcard-badge{display:inline-block;margin-top:10px;background:var(--g3);color:var(--t9);padding:3px 11px;border-radius:100px;font-size:.63rem;font-weight:700}
+.hcard-3-num{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--g3)}
+.hcard-3-sub{font-size:.63rem;color:rgba(255,255,255,.48);margin-top:3px}
+
+@keyframes heroUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── MARQUEE ─── */
+.marquee-bar{background:var(--g5);overflow:hidden;padding:11px 0}
+.marquee-track{display:flex;white-space:nowrap;animation:scrollMarq 28s linear infinite}
+@keyframes scrollMarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-item{display:inline-flex;align-items:center;gap:20px;padding:0 28px;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--t9)}
+.marquee-sep{width:4px;height:4px;background:rgba(5,42,39,.4);border-radius:50%}
+
+/* ══════════════════════════════════════════
+   SERVICES
+══════════════════════════════════════════ */
+.services{background:var(--paper)}
+.services-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(40px,6vw,60px);flex-wrap:wrap;gap:16px}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:clamp(12px,1.5vw,18px)}
+.svc-card{background:var(--canvas);border-radius:var(--rl);padding:clamp(24px,3vw,36px);border:1px solid var(--ink15);position:relative;overflow:hidden;transition:transform .5s var(--ease-out),box-shadow .5s,border-color .4s;cursor:default}
+.svc-card::after{content:'';position:absolute;inset:-60%;background:conic-gradient(from 180deg,transparent 52%,rgba(53,175,160,.07) 74%,transparent 100%);transform:translate(-100%,-100%);transition:transform 1.1s cubic-bezier(.85,0,.15,1)}
+.svc-card:hover::after{transform:translate(60%,60%)}
+.svc-card:hover{transform:translateY(-9px);box-shadow:0 28px 60px rgba(5,42,39,.1);border-color:rgba(23,117,106,.18)}
+.svc-card.featured{grid-column:1/2;grid-row:1/3;background:var(--t9);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(28px,3.5vw,46px)}
+.svc-card.featured::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 78% 65% at 22% 22%,rgba(53,175,160,.22) 0%,transparent 60%)}
+.svc-icon{width:48px;height:48px;border-radius:13px;background:var(--t1);color:var(--t7);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:20px;transition:transform .4s var(--spring);position:relative;z-index:1;flex-shrink:0}
+.svc-card:hover .svc-icon{transform:scale(1.1) rotate(6deg)}
+.svc-card.featured .svc-icon{background:rgba(255,255,255,.13);color:#fff}
+.svc-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:600;color:var(--ink);margin-bottom:9px;position:relative;z-index:1}
+.svc-card.featured .svc-name{color:#fff;font-size:clamp(1.4rem,2.5vw,1.85rem)}
+.svc-desc{font-size:clamp(.78rem,1.2vw,.84rem);line-height:1.72;color:var(--ink70);position:relative;z-index:1}
+.svc-card.featured .svc-desc{color:rgba(255,255,255,.6)}
+.svc-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.76rem;font-weight:600;color:var(--t5);transition:gap .3s;position:relative;z-index:1}
+.svc-card.featured .svc-link{color:var(--g3)}
+.svc-card:hover .svc-link{gap:13px}
+.svc-tag{position:absolute;top:16px;right:16px;background:rgba(23,117,106,.1);border:1px solid rgba(23,117,106,.18);color:var(--t5);padding:3px 10px;border-radius:100px;font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.svc-card.featured .svc-tag{background:rgba(226,180,68,.14);border-color:rgba(226,180,68,.28);color:var(--g3)}
+
+/* ══════════════════════════════════════════
+   PROOF / REVIEWS
+══════════════════════════════════════════ */
+.proof{background:var(--t9);position:relative;overflow:hidden}
+.proof::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 65% at 90% 50%,rgba(53,175,160,.1) 0%,transparent 60%),radial-gradient(ellipse 38% 48% at 8% 80%,rgba(198,148,26,.07) 0%,transparent 50%);pointer-events:none}
+.proof-inner{position:relative;z-index:1}
+.proof-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(40px,6vw,60px);flex-wrap:wrap;gap:20px}
+.rating-pill{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:100px;padding:12px 24px;flex-shrink:0}
+.rating-n{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;color:var(--g3)}
+.rating-sub{font-size:.65rem;color:rgba(255,255,255,.42);margin-top:2px}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.5vw,18px)}
+.rev-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--rl);padding:clamp(22px,2.8vw,32px);transition:background .4s,border-color .4s,transform .5s var(--ease-out);cursor:default}
+.rev-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.13);transform:translateY(-7px)}
+.rev-card.featured{background:linear-gradient(145deg,rgba(53,175,160,.15),rgba(53,175,160,.05));border-color:rgba(53,175,160,.24)}
+.rev-stars{font-size:.78rem;margin-bottom:14px}
+.rev-q{font-size:clamp(.82rem,1.2vw,.9rem);line-height:1.8;color:rgba(255,255,255,.74);margin-bottom:18px;font-style:italic}
+.rev-author{display:flex;align-items:center;gap:11px}
+.rev-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:#fff;flex-shrink:0}
+.rev-name{font-size:.82rem;font-weight:600;color:#fff}
+.rev-pet{font-size:.68rem;color:rgba(255,255,255,.4)}
+
+/* ══════════════════════════════════════════
+   DOCTORS
+══════════════════════════════════════════ */
+.doctors{background:var(--canvas)}
+.doctors-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(40px,6vw,58px);flex-wrap:wrap;gap:16px}
+.docs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.5vw,18px)}
+.doc-card{border-radius:var(--rl);overflow:hidden;background:var(--paper);border:1px solid var(--ink15);transition:transform .5s var(--ease-out),box-shadow .5s;cursor:default}
+.doc-card:hover{transform:translateY(-9px);box-shadow:0 28px 60px rgba(5,42,39,.1)}
+.doc-photo{height:clamp(160px,18vw,220px);display:flex;align-items:center;justify-content:center;font-size:clamp(3rem,5vw,4.5rem);position:relative;overflow:hidden}
+.doc-card:nth-child(1) .doc-photo{background:linear-gradient(145deg,#052A27,#17756A)}
+.doc-card:nth-child(2) .doc-photo{background:linear-gradient(145deg,#38184A,#7248B5)}
+.doc-card:nth-child(3) .doc-photo{background:linear-gradient(145deg,#641F10,#C0633A)}
+.doc-card:nth-child(4) .doc-photo{background:linear-gradient(145deg,#122F50,#2E6FB5)}
+.doc-photo-fade{position:absolute;bottom:0;left:0;right:0;height:45%;background:linear-gradient(to top,rgba(0,0,0,.38),transparent)}
+.doc-body{padding:clamp(16px,2vw,22px)}
+.doc-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.6vw,1.15rem);font-weight:600;color:var(--ink);margin-bottom:3px}
+.doc-spec{font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t5);margin-bottom:8px}
+.doc-bio{font-size:clamp(.72rem,1.1vw,.78rem);line-height:1.65;color:var(--ink70)}
+.doc-seo{font-size:.6rem;color:var(--ink40);margin-top:7px;line-height:1.5}
+
+/* ══════════════════════════════════════════
+   LEAD MAGNET + CHATBOT
+══════════════════════════════════════════ */
+.lead-sec{background:var(--blush);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,80px);align-items:center}
+.magnets{display:flex;flex-direction:column;gap:12px;margin-top:28px}
+.magnet{display:flex;align-items:flex-start;gap:14px;background:#fff;padding:clamp(14px,2vw,18px) clamp(16px,2.2vw,20px);border-radius:var(--rm);border:1px solid var(--ink15);transition:transform .4s var(--spring),box-shadow .4s;cursor:default}
+.magnet:hover{transform:translateX(8px);box-shadow:0 8px 26px rgba(5,42,39,.07)}
+.magnet-icon{font-size:1.55rem;flex-shrink:0;line-height:1;margin-top:1px}
+.magnet h4{font-size:clamp(.82rem,1.2vw,.88rem);font-weight:600;color:var(--ink);margin-bottom:3px}
+.magnet p{font-size:clamp(.72rem,1vw,.76rem);color:var(--ink70);line-height:1.58}
+
+/* Chatbot */
+.chat-win{background:#fff;border-radius:clamp(20px,3vw,28px);box-shadow:0 30px 80px rgba(5,42,39,.11),0 0 0 1px rgba(0,0,0,.04);overflow:hidden}
+.chat-hd{background:var(--t9);padding:18px clamp(16px,2.2vw,22px);display:flex;align-items:center;gap:13px}
+.chat-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--g3),var(--g5));display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.chat-av-info h4{color:#fff;font-size:.86rem;font-weight:600}
+.chat-status{display:flex;align-items:center;gap:5px}
+.chat-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:chatPulse 2s infinite;flex-shrink:0}
+@keyframes chatPulse{0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.5)}50%{box-shadow:0 0 0 5px rgba(74,222,128,0)}}
+.chat-dot-txt{font-size:.66rem;color:rgba(255,255,255,.52)}
+.chat-msgs{padding:18px;min-height:220px;display:flex;flex-direction:column;gap:10px;background:var(--canvas);max-height:280px;overflow-y:auto}
+.chat-msg{max-width:84%;padding:10px 14px;border-radius:14px;font-size:.8rem;line-height:1.55}
+.chat-msg.bot{background:#fff;color:var(--ink);border-bottom-left-radius:3px;align-self:flex-start;box-shadow:0 2px 7px rgba(0,0,0,.06)}
+.chat-msg.usr{background:var(--t7);color:#fff;border-bottom-right-radius:3px;align-self:flex-end}
+.chat-opts{padding:8px 18px 12px;display:flex;flex-wrap:wrap;gap:7px;background:var(--canvas)}
+.chat-opt{padding:7px 14px;border-radius:100px;border:1.5px solid var(--t5);color:var(--t5);font-size:.72rem;font-weight:600;background:none;cursor:pointer;transition:background .25s,color .25s,transform .3s var(--spring)}
+.chat-opt:hover{background:var(--t5);color:#fff;transform:translateY(-2px)}
+.chat-inp-row{padding:12px 16px;border-top:1px solid rgba(0,0,0,.06);display:flex;gap:9px;align-items:center}
+.chat-inp{flex:1;padding:10px 14px;border-radius:100px;border:1.5px solid var(--ink15);font-family:'Outfit',sans-serif;font-size:.8rem;outline:none;background:var(--canvas);transition:border-color .3s;min-width:0}
+.chat-inp:focus{border-color:var(--t5)}
+.chat-send{width:38px;height:38px;background:var(--t9);border:none;border-radius:50%;color:#fff;font-size:.88rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,transform .3s var(--spring);flex-shrink:0}
+.chat-send:hover{background:var(--t5);transform:scale(1.1)}
+
+/* ══════════════════════════════════════════
+   SPECIALITY
+══════════════════════════════════════════ */
+.specs{background:var(--paper)}
+.specs-head{text-align:center;margin-bottom:clamp(40px,6vw,58px)}
+.specs-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,1.3vw,14px)}
+.spec-card{background:var(--canvas);border-radius:var(--rl);padding:clamp(20px,2.5vw,28px) clamp(14px,1.8vw,20px);text-align:center;border:1px solid var(--ink15);position:relative;overflow:hidden;transition:transform .45s var(--ease-out),box-shadow .45s,background .3s,border-color .3s;cursor:default}
+.spec-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,var(--t5),var(--g3));transform:scaleX(0);transition:transform .4s var(--ease-out)}
+.spec-card:hover{transform:translateY(-10px);box-shadow:0 22px 50px rgba(5,42,39,.09);background:#fff;border-color:rgba(23,117,106,.15)}
+.spec-card:hover::before{transform:scaleX(1)}
+.spec-icon{font-size:clamp(1.8rem,2.5vw,2.2rem);display:block;margin-bottom:12px;transition:transform .4s var(--spring)}
+.spec-card:hover .spec-icon{transform:scale(1.15) rotate(-6deg)}
+.spec-name{font-size:clamp(.78rem,1.1vw,.84rem);font-weight:600;color:var(--ink);margin-bottom:4px}
+.spec-desc{font-size:clamp(.66rem,.9vw,.72rem);color:var(--ink70);line-height:1.55}
+
+/* ══════════════════════════════════════════
+   BLOG
+══════════════════════════════════════════ */
+.blog{background:var(--canvas)}
+.blog-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(36px,5vw,52px);flex-wrap:wrap;gap:16px}
+.blog-grid{display:grid;grid-template-columns:1.65fr 1fr 1fr;gap:clamp(12px,1.5vw,18px)}
+.blog-card{background:var(--paper);border-radius:var(--rl);overflow:hidden;border:1px solid var(--ink15);transition:transform .5s var(--ease-out),box-shadow .5s;cursor:default}
+.blog-card:hover{transform:translateY(-8px);box-shadow:0 26px 60px rgba(5,42,39,.1)}
+.blog-thumb{display:flex;align-items:center;justify-content:center;font-size:clamp(2.5rem,4vw,3.5rem)}
+.blog-card:nth-child(1) .blog-thumb{height:clamp(180px,20vw,240px);background:linear-gradient(145deg,var(--t9),var(--t5))}
+.blog-card:nth-child(2) .blog-thumb{height:clamp(140px,16vw,180px);background:linear-gradient(145deg,#C4714A,#E8A87C)}
+.blog-card:nth-child(3) .blog-thumb{height:clamp(140px,16vw,180px);background:linear-gradient(145deg,#6B4E9E,#9B7AC7)}
+.blog-body{padding:clamp(18px,2.2vw,24px)}
+.blog-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.btag{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:100px;background:var(--t1);color:var(--t7)}
+.blog-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.6vw,1.2rem);font-weight:600;line-height:1.3;color:var(--ink);margin-bottom:8px}
+.blog-card:nth-child(1) .blog-title{font-size:clamp(1.15rem,2vw,1.5rem)}
+.blog-exc{font-size:clamp(.74rem,1.1vw,.8rem);color:var(--ink70);line-height:1.68;margin-bottom:12px}
+.blog-meta{font-size:.65rem;color:var(--ink40);display:flex;align-items:center;gap:7px}
+.blog-meta::before{content:'';width:14px;height:1px;background:var(--ink40)}
+
+/* ══════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════ */
+.about{background:var(--paper);display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,8vw,100px);align-items:center}
+.about-visual{position:relative;height:clamp(380px,45vw,520px)}
+.about-bg-card{position:absolute;top:0;left:0;right:clamp(40px,7vw,80px);bottom:clamp(60px,9vw,100px);background:var(--t9);border-radius:clamp(20px,3vw,28px);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.about-bg-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 28% 28%,rgba(53,175,160,.24) 0%,transparent 62%)}
+.about-big-emoji{font-size:clamp(5rem,9vw,8rem);opacity:.1;position:absolute}
+.about-float-card{position:absolute;bottom:0;right:0;width:clamp(200px,22vw,260px);background:#fff;border-radius:var(--rl);padding:clamp(20px,2.5vw,28px);box-shadow:0 24px 60px rgba(5,42,39,.13);border:1px solid rgba(0,0,0,.04)}
+.about-metric{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,3.5vw,3rem);font-weight:700;color:var(--t7);line-height:1}
+.about-metric-lbl{font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink70);margin-top:5px}
+.about-badges{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap}
+.abadge{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:100px;background:var(--t1);color:var(--t7)}
+.pillars{display:flex;flex-direction:column;gap:11px;margin-top:28px}
+.pillar{display:flex;align-items:center;gap:13px;background:var(--canvas);padding:14px 17px;border-radius:var(--rm);border:1px solid var(--ink15);transition:transform .4s var(--spring),box-shadow .4s;cursor:default}
+.pillar:hover{transform:translateX(8px);box-shadow:0 7px 22px rgba(5,42,39,.07)}
+.pillar-ico{font-size:1.3rem}
+.pillar h4{font-size:.84rem;font-weight:600;color:var(--ink)}
+.pillar p{font-size:.72rem;color:var(--ink70)}
+
+/* ══════════════════════════════════════════
+   LOCATION
+══════════════════════════════════════════ */
+.location{background:var(--t9);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,80px);align-items:center}
+.location::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 48% 58% at 80% 50%,rgba(53,175,160,.11) 0%,transparent 60%);pointer-events:none}
+.loc-inner{position:relative;z-index:1}
+.loc-details{display:flex;flex-direction:column;gap:12px;margin-bottom:30px}
+.loc-item{display:flex;gap:12px;align-items:flex-start}
+.loc-ico{width:36px;height:36px;border-radius:9px;flex-shrink:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.88rem}
+.loc-txt h4{font-size:.82rem;font-weight:600;color:#fff;margin-bottom:1px}
+.loc-txt p{font-size:.76rem;color:rgba(255,255,255,.5);line-height:1.5}
+.loc-btns{display:flex;gap:11px;flex-wrap:wrap}
+.map-card{position:relative;z-index:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:clamp(20px,3vw,28px);min-height:clamp(280px,32vw,380px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;overflow:hidden;padding:32px}
+.map-card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0px,rgba(255,255,255,.018) 1px,transparent 1px,transparent 44px),repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0px,rgba(255,255,255,.018) 1px,transparent 1px,transparent 44px)}
+.map-pin{font-size:2.6rem;animation:mapBounce 2.6s ease-in-out infinite;position:relative;z-index:1}
+@keyframes mapBounce{0%,100%{transform:translateY(0)}48%{transform:translateY(-14px)}56%{transform:translateY(-10px)}}
+.map-label{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,1.8vw,1.25rem);font-weight:600;color:#fff;position:relative;z-index:1;text-align:center}
+.map-sub{font-size:.74rem;color:rgba(255,255,255,.42);text-align:center;max-width:180px;line-height:1.55;position:relative;z-index:1}
+.map-link{position:relative;z-index:1;margin-top:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;padding:8px 20px;border-radius:100px;font-size:.72rem;font-weight:600;transition:background .3s,transform .3s var(--spring)}
+.map-link:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+
+/* ══════════════════════════════════════════
+   LEAD FORM
+══════════════════════════════════════════ */
+.form-sec{background:linear-gradient(165deg,var(--t9) 0%,#020d0c 100%);position:relative;overflow:hidden}
+.form-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 56% 65% at 18% 50%,rgba(53,175,160,.09) 0%,transparent 60%),radial-gradient(ellipse 36% 46% at 82% 18%,rgba(198,148,26,.07) 0%,transparent 52%)}
+.form-inner{max-width:640px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.form-lead{font-size:clamp(.86rem,1.3vw,.95rem);color:rgba(255,255,255,.56);line-height:1.82;margin-bottom:38px}
+.form-grid{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);border-radius:clamp(20px,3vw,28px);padding:clamp(24px,4vw,38px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.5vw,15px);text-align:left}
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld label{font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.48)}
+.fld input,.fld select{padding:12px 14px;border-radius:11px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.07);color:#fff;font-family:'Outfit',sans-serif;font-size:.82rem;outline:none;transition:border-color .3s,background .3s;width:100%}
+.fld input::placeholder{color:rgba(255,255,255,.26)}
+.fld select option{background:var(--t9);color:#fff}
+.fld input:focus,.fld select:focus{border-color:var(--t3);background:rgba(255,255,255,.1)}
+.fld.full{grid-column:1/-1}
+.form-submit{grid-column:1/-1;background:linear-gradient(135deg,var(--g3),var(--g5));color:var(--t9);padding:15px;border:none;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:transform .4s var(--spring),box-shadow .4s;box-shadow:0 7px 26px rgba(198,148,26,.42);width:100%}
+.form-submit:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 14px 36px rgba(198,148,26,.52)}
+.form-privacy{grid-column:1/-1;text-align:center;font-size:.64rem;color:rgba(255,255,255,.3);margin-top:2px}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer{background:var(--ink);color:rgba(255,255,255,.48);padding:clamp(48px,7vw,72px) var(--pad-x) clamp(24px,3.5vw,36px)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:clamp(32px,5vw,56px);padding-bottom:clamp(36px,5vw,52px);border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:clamp(22px,3vw,30px)}
+.footer-brand-logo{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.footer-brand-logo em{color:var(--g3);font-style:normal}
+.footer-desc{font-size:.76rem;line-height:1.8;max-width:240px}
+.fcol h5{font-size:.63rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:17px}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.fcol ul li a{color:rgba(255,255,255,.44);font-size:.76rem;transition:color .3s;display:inline-flex;align-items:center;gap:5px}
+.fcol ul li a:hover{color:var(--t3)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:.7rem;flex-wrap:wrap;gap:10px}
+.footer-bottom a{color:var(--t3)}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — TABLET (≤ 960px)
+══════════════════════════════════════════ */
+@media(max-width:960px){
+  .nav-links{display:none}
+  .ham{display:flex}
+  .mob-menu{display:flex}
+
+  .hero-inner{grid-template-columns:1fr;grid-template-rows:auto}
+  .hero-right{display:none}
+  .hero-left{padding:clamp(90px,14vw,130px) var(--pad-x) clamp(50px,8vw,80px);align-items:center;text-align:center}
+  .hero-badge{align-self:center}
+  .hero h1{text-align:center}
+  .hero-sub{max-width:540px;text-align:center}
+  .hero-btns{justify-content:center}
+  .hero-stats{align-self:center}
+  .hstat{padding:14px 18px}
+
+  .services-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .svc-card.featured{grid-column:1/-1;grid-row:auto;flex-direction:row;align-items:flex-start;gap:20px}
+  .svc-card.featured .svc-icon{flex-shrink:0;margin-bottom:0}
+
+  .reviews-grid{grid-template-columns:1fr 1fr}
+  .rev-card:nth-child(3){display:none}
+
+  .docs-grid{grid-template-columns:1fr 1fr}
+
+  .lead-sec{grid-template-columns:1fr;gap:40px}
+
+  .specs-grid{grid-template-columns:repeat(4,1fr)}
+  .specs-grid .spec-card:nth-child(9),.specs-grid .spec-card:nth-child(10){display:none}
+
+  .blog-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto auto}
+  .blog-card:nth-child(1){grid-column:1/-1}
+
+  .about{grid-template-columns:1fr}
+  .about-visual{height:clamp(260px,40vw,360px);margin-bottom:8px}
+  .about-bg-card{right:clamp(30px,6vw,60px);bottom:clamp(50px,8vw,80px)}
+  .about-float-card{width:clamp(170px,26vw,220px)}
+
+  .location{grid-template-columns:1fr}
+  .map-card{min-height:240px}
+
+  .footer-top{grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,40px)}
+  .footer-brand-desc-col{grid-column:1/-1}
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — MOBILE (≤ 600px)
+══════════════════════════════════════════ */
+@media(max-width:600px){
+  :root{--pad-x:20px;--pad-sec:52px}
+  body{cursor:auto}
+  #cur-dot,#cur-ring{display:none}
+
+  .nav{padding:16px var(--pad-x)}
+  .nav.scrolled{padding:12px var(--pad-x)}
+  .nav-cta{display:none}
+
+  /* HERO */
+  .hero-inner{display:flex;flex-direction:column}
+  .hero-left{padding:88px 20px 52px;align-items:center;text-align:center}
+  .hero h1{font-size:clamp(2.2rem,9vw,2.8rem)}
+  .hero-stats{flex-wrap:wrap;border-radius:12px}
+  .hstat{padding:13px 16px;border-right:none;border-bottom:1px solid rgba(255,255,255,.07);width:50%}
+  .hstat:nth-child(odd){border-right:1px solid rgba(255,255,255,.07)}
+  .hstat:nth-last-child(-n+2){border-bottom:none}
+  .hero-btns{flex-direction:column;width:100%}
+  .btn-primary,.btn-outline-white,.btn-teal,.btn-wa{width:100%;justify-content:center}
+
+  /* SERVICES */
+  .services-head{flex-direction:column;align-items:flex-start}
+  .services-grid{grid-template-columns:1fr}
+  .svc-card.featured{flex-direction:column}
+
+  /* PROOF */
+  .proof-top{flex-direction:column;align-items:flex-start}
+  .reviews-grid{grid-template-columns:1fr}
+  .rev-card:nth-child(3){display:flex}
+
+  /* DOCTORS */
+  .docs-grid{grid-template-columns:1fr 1fr}
+  .doc-seo{display:none}
+
+  /* LEAD + CHAT */
+  .lead-sec{padding:var(--pad-sec) var(--pad-x)}
+
+  /* SPECS */
+  .specs-grid{grid-template-columns:repeat(2,1fr)}
+  .specs-grid .spec-card:nth-child(9),.specs-grid .spec-card:nth-child(10){display:flex;flex-direction:column}
+
+  /* BLOG */
+  .blog-grid{grid-template-columns:1fr}
+  .blog-card:nth-child(1){grid-column:auto}
+
+  /* ABOUT */
+  .about{grid-template-columns:1fr;gap:40px}
+  .about-visual{height:clamp(280px,70vw,340px)}
+  .about-float-card{width:clamp(150px,42vw,190px)}
+
+  /* LOCATION */
+  .location{grid-template-columns:1fr}
+  .loc-btns{flex-direction:column}
+  .btn-wa,.bgl{width:100%;justify-content:center}
+
+  /* FORM */
+  .form-grid{grid-template-columns:1fr}
+  .fld.full{grid-column:1}
+
+  /* FOOTER */
+  .footer-top{grid-template-columns:1fr}
+  .footer-brand-desc-col{grid-column:auto}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+
+/* Magnetic btns */
+.mag{transition:transform .35s var(--ease-out)}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="sprog"></div>
+
+<!-- Cursor (desktop) -->
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<!-- Floating WA -->
+<a href="https://wa.me/918448449955?text=Hi%20MaxPetZ!%20I%27d%20like%20to%20book%20a%20home%20visit." class="wa-float" aria-label="WhatsApp MaxPetZ">
+  <div class="wa-float-pulse"></div>💬
+</a>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="nav" class="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-cross">+</div>Max<em>PetZ</em>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#doctors">Our Vets</a></li>
+    <li><a href="#speciality">Speciality</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="#form" class="nav-cta mag">📅 Book Visit</a>
+  <div class="ham" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-close" id="mobClose">✕</span>
+  <a href="#services" class="mob-link">Services</a>
+  <a href="#doctors" class="mob-link">Our Vets</a>
+  <a href="#speciality" class="mob-link">Speciality</a>
+  <a href="#blog" class="mob-link">Blog</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#form" class="mob-menu-cta">📅 Book Home Visit</a>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-inner">
+    <!-- Left content -->
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Pioneers in Pet Healthcare Since 1952 · 844 844 9955
+      </div>
+
+      <h1>
+        <strong>Because Every</strong>
+        <em>Pawrent Deserves</em>
+        Peace of Mind.
+      </h1>
+
+      <p class="hero-sub">
+        South Delhi's most trusted at-home veterinary service — bringing world-class vet care directly to your door in East of Kailash, GK1, GK2 &amp; Hauz Khas. Because your fur-baby's health shouldn't come with clinic anxiety.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#form" class="btn-primary mag"><span>🐾</span><span>Book a Home Visit</span></a>
+        <a href="tel:8448449955" class="btn-outline-white"><span>📞</span><span>844 844 9955</span></a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hstat">
+          <span class="hstat-n"><span class="cnt" data-to="2400" data-s="+">0</span></span>
+          <span class="hstat-l">Pets Treated</span>
+        </div>
+        <div class="hstat">
+          <span class="hstat-n"><span class="cnt" data-to="98" data-s="%">0</span></span>
+          <span class="hstat-l">Happy Pawrents</span>
+        </div>
+        <div class="hstat">
+          <span class="hstat-n">70+</span>
+          <span class="hstat-l">Years of Trust</span>
+        </div>
+        <div class="hstat">
+          <span class="hstat-n"><span class="cnt" data-to="12">0</span></span>
+          <span class="hstat-l">Expert Vets</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right — floating cards -->
+    <div class="hero-right">
+      <div class="hcards" id="hcards">
+        <div class="hring1"></div>
+        <div class="hring2"></div>
+        <div class="hcard hcard-main">
+          <span class="hcard-icon">🏠</span>
+          <div class="hcard-title">At-Home Visit Today</div>
+          <p class="hcard-sub">Mon–Sun · 8 AM–8 PM<br>East of Kailash &amp; South Delhi</p>
+          <div class="hcard-badge">✓ Fear Free™ Certified</div>
+        </div>
+        <div class="hcard hcard-2">
+          <span class="hcard-icon">🌫️</span>
+          <div class="hcard-title">Delhi AQI Alert</div>
+          <p class="hcard-sub">Smog protocols for Pugs, Bulldogs &amp; Shih Tzus</p>
+        </div>
+        <div class="hcard hcard-3">
+          <div class="hcard-3-num">4.9★</div>
+          <div class="hcard-3-sub">600+ Google Reviews</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MARQUEE ══════════ -->
+<div class="marquee-bar">
+  <div class="marquee-track" id="mtrack"></div>
+</div>
+
+<!-- ══════════ SERVICES ══════════ -->
+<section class="services sec" id="services">
+  <div class="services-head">
+    <div class="rv">
+      <div class="kicker">What We Offer</div>
+      <h2 class="sh">Designed for Anxious<br><em>Pawrents Like You</em></h2>
+    </div>
+    <a href="#form" class="link-arr rv d2">Explore All Services →</a>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card featured rv d1">
+      <div class="svc-tag">⭐ Most Booked</div>
+      <div class="svc-icon">🏠</div>
+      <div class="svc-name">At-Home Consultation</div>
+      <p class="svc-desc">Our expert vets come to you — eliminating the terror of clinic travel for both you and your fur-baby. A full clinical examination in your pet's safe, familiar space. No queues, no strangers, no meltdowns. Available across East of Kailash, GK1, GK2, Hauz Khas, Lajpat Nagar &amp; Defence Colony.</p>
+      <a href="#form" class="svc-link">Book Today →</a>
+    </div>
+    <div class="svc-card rv d2">
+      <div class="svc-tag">Fear Free™</div>
+      <div class="svc-icon">💉</div>
+      <div class="svc-name">Vaccination &amp; Preventive Care</div>
+      <p class="svc-desc">Complete puppy &amp; adult vaccine schedules — Parvovirus, Distemper, Rabies. Critical shields your pet needs to survive Delhi's urban environment.</p>
+      <a href="#form" class="svc-link">Learn More →</a>
+    </div>
+    <div class="svc-card rv d3">
+      <div class="svc-icon">🔬</div>
+      <div class="svc-name">Advanced Home Diagnostics</div>
+      <p class="svc-desc">Portable blood panels, urinalysis &amp; rapid diagnostic kits at your door. Results in 30 minutes, explained with full clarity — no jargon.</p>
+      <a href="#form" class="svc-link">Learn More →</a>
+    </div>
+    <div class="svc-card rv d4">
+      <div class="svc-icon">🫁</div>
+      <div class="svc-name">Respiratory &amp; Smog Care</div>
+      <p class="svc-desc">Delhi AQI is brutal. Our specialists protect brachycephalic breeds — Pugs, Shih Tzus &amp; Bulldogs — with targeted smog protocols during toxic air events.</p>
+      <a href="#form" class="svc-link">Get Free Smog Guide →</a>
+    </div>
+    <div class="svc-card rv d2">
+      <div class="svc-icon">🦴</div>
+      <div class="svc-name">Orthopaedic &amp; Joint Care</div>
+      <p class="svc-desc">Winter joint management for senior Labs, Goldens &amp; Indies. Physiotherapy &amp; pain management protocols designed for Delhi's harsh winters.</p>
+      <a href="#form" class="svc-link">Learn More →</a>
+    </div>
+    <div class="svc-card rv d3">
+      <div class="svc-icon">✂️</div>
+      <div class="svc-name">Premium Home Grooming</div>
+      <p class="svc-desc">Spa-grade grooming, de-shedding, medicated baths for monsoon skin issues &amp; tick removal — in the calm of your home, not a stressful salon.</p>
+      <a href="#form" class="svc-link">Book Grooming →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROOF ══════════ -->
+<section class="proof sec" id="reviews">
+  <div class="proof-inner">
+    <div class="proof-top">
+      <div class="rv">
+        <div class="kicker light">Real Pawrent Stories</div>
+        <h2 class="sh white">Stories of <em>Real Relief</em></h2>
+      </div>
+      <div class="rating-pill rv d2">
+        <div class="rating-n">4.9</div>
+        <div>
+          <div style="font-size:.82rem">⭐⭐⭐⭐⭐</div>
+          <div class="rating-sub">600+ Verified Google Reviews</div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="rev-card featured rv d1">
+        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+        <p class="rev-q">"When my Pug Bella couldn't breathe during November's terrible smog, MaxPetZ reached my home in 40 minutes. Their oxygen therapy literally saved her life. I've never trusted anyone more with Bella's health. Every pawrent in South Delhi needs this number."</p>
+        <div class="rev-author">
+          <div class="rev-av" style="background:linear-gradient(135deg,var(--t5),var(--t3))">P</div>
+          <div><div class="rev-name">Priya Malhotra</div><div class="rev-pet">🐶 Bella, 4-yr Pug · East of Kailash</div></div>
+        </div>
+      </div>
+      <div class="rev-card rv d2">
+        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+        <p class="rev-q">"As a pawrent to an 11-year-old Golden, Delhi winters were destroying Daisy's joints. MaxPetZ's home physio program has transformed her mornings — she's running again. Life-changing care from genuinely compassionate doctors."</p>
+        <div class="rev-author">
+          <div class="rev-av" style="background:linear-gradient(135deg,#C4714A,#E8A87C)">R</div>
+          <div><div class="rev-name">Rohit Sharma</div><div class="rev-pet">🐕 Daisy, 11-yr Retriever · GK2</div></div>
+        </div>
+      </div>
+      <div class="rev-card rv d3">
+        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+        <p class="rev-q">"Every pawrent of an anxious cat knows the dread of clinic day. Home visits changed everything for Mochi. The vet is so calm, so gentle — my Persian barely notices. I finally found my forever vet practice."</p>
+        <div class="rev-author">
+          <div class="rev-av" style="background:linear-gradient(135deg,#6B4E9E,#9B7AC7)">A</div>
+          <div><div class="rev-name">Ananya Kapoor</div><div class="rev-pet">🐱 Mochi, 3-yr Persian · Hauz Khas</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DOCTORS ══════════ -->
+<section class="doctors sec" id="doctors">
+  <div class="doctors-head">
+    <div class="rv">
+      <div class="kicker">Expert Team</div>
+      <h2 class="sh">Meet Your Pet's<br><em>New Best Friends</em></h2>
+    </div>
+    <a href="#form" class="link-arr rv d2">Book a Specialist →</a>
+  </div>
+  <div class="docs-grid">
+    <div class="doc-card rv d1">
+      <div class="doc-photo">🩺<div class="doc-photo-fade"></div></div>
+      <div class="doc-body">
+        <div class="doc-name">Dr. Meera Nair</div>
+        <div class="doc-spec">Internal Medicine &amp; Critical Care</div>
+        <p class="doc-bio">10 years specialising in respiratory emergencies and brachycephalic breed care. The first call every pawrent makes when their Pug can't breathe.</p>
+        <p class="doc-seo">Veterinary internal medicine South Delhi · brachycephalic specialist · pug vet East of Kailash</p>
+      </div>
+    </div>
+    <div class="doc-card rv d2">
+      <div class="doc-photo">👨‍⚕️<div class="doc-photo-fade"></div></div>
+      <div class="doc-body">
+        <div class="doc-name">Dr. Arjun Khanna</div>
+        <div class="doc-spec">Orthopaedics &amp; Rehabilitation</div>
+        <p class="doc-bio">Specialist in canine joint disorders, hip dysplasia &amp; home physiotherapy. Beloved by every pawrent with an ageing Labrador or Golden in South Delhi.</p>
+        <p class="doc-seo">Dog orthopaedic vet Delhi · canine joint pain South Delhi · hip dysplasia specialist GK</p>
+      </div>
+    </div>
+    <div class="doc-card rv d3">
+      <div class="doc-photo">👩‍⚕️<div class="doc-photo-fade"></div></div>
+      <div class="doc-body">
+        <div class="doc-name">Dr. Sania Patel</div>
+        <div class="doc-spec">Feline Medicine &amp; Dermatology</div>
+        <p class="doc-bio">Cat-only specialist — a true gift for every cat pawrent tired of the carrier-and-clinic ordeal. Expert in monsoon hot spots, allergies &amp; fungal skin issues.</p>
+        <p class="doc-seo">Cat vet at home Delhi · feline specialist South Delhi · pet skin doctor Delhi</p>
+      </div>
+    </div>
+    <div class="doc-card rv d4">
+      <div class="doc-photo">🦷<div class="doc-photo-fade"></div></div>
+      <div class="doc-body">
+        <div class="doc-name">Dr. Vikram Singh</div>
+        <div class="doc-spec">Dentistry &amp; Preventive Care</div>
+        <p class="doc-bio">Certified in veterinary dentistry and Fear Free™ handling. The vet who makes the scariest pawrent-worry — dental surgery — feel completely manageable.</p>
+        <p class="doc-seo">Pet dentist Delhi · dog teeth cleaning South Delhi · Fear Free vet GK2</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ LEAD MAGNET + CHATBOT ══════════ -->
+<section class="lead-sec sec" id="chatbot">
+  <div>
+    <div class="rv">
+      <div class="kicker">Smart Pet Health</div>
+      <h2 class="sh">Ask Dr. Max —<br><em>Your 24/7 Vet AI</em></h2>
+    </div>
+    <p class="body-txt rv d1" style="margin-top:14px;max-width:480px">Worried at 2 AM because your Pug is wheezing? Our AI vet triages your pet's symptoms instantly, schedules emergency visits &amp; sends free care guides — so every pawrent always has a calm, expert voice exactly when they need it.</p>
+    <div class="magnets rv d2">
+      <div class="magnet">
+        <div class="magnet-icon">🌫️</div>
+        <div>
+          <h4>Free: South Delhi Smog Survival Guide</h4>
+          <p>5 essential steps to protect your Pug's lungs during AQI spikes. Downloaded by 1,200+ pawrents and counting.</p>
+        </div>
+      </div>
+      <div class="magnet">
+        <div class="magnet-icon">❄️</div>
+        <div>
+          <h4>Free E-Book: Aging Gracefully in Delhi's Winters</h4>
+          <p>The complete pawrent guide to managing canine joint pain &amp; dry skin from December through February.</p>
+        </div>
+      </div>
+      <div class="magnet">
+        <div class="magnet-icon">🐛</div>
+        <div>
+          <h4>Printable: Monsoon Parasite Prevention Calendar</h4>
+          <p>Month-by-month tick, flea &amp; hot-spot prevention schedule tailored for Delhi's monsoon — every pawrent's must-have.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rv-r d2">
+    <div class="chat-win">
+      <div class="chat-hd">
+        <div class="chat-av">🐾</div>
+        <div class="chat-av-info">
+          <h4>Dr. Max · MaxPetZ AI</h4>
+          <div class="chat-status"><div class="chat-dot"></div><span class="chat-dot-txt">Online · responds instantly</span></div>
+        </div>
+      </div>
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="chat-msg bot">👋 Hi Pawrent! I'm Dr. Max. Is your fur-baby unwell, or would you like to book a home visit?</div>
+        <div class="chat-msg usr">My dog has been coughing since the smog yesterday</div>
+        <div class="chat-msg bot">I understand — Delhi's AQI is brutal, especially for flat-faced breeds. Is your dog a Pug, Bulldog, or Shih Tzu? And is the cough dry or wet?</div>
+        <div class="chat-msg usr">She's a Pug. The cough sounds wet</div>
+        <div class="chat-msg bot">⚠️ A wet cough + smog exposure in a Pug needs a vet check within 24 hours. Don't wait, Pawrent. I can book a home visit for today. What's your area in South Delhi?</div>
+      </div>
+      <div class="chat-opts">
+        <button class="chat-opt" onclick="chatReply('Book emergency visit')">🚨 Emergency</button>
+        <button class="chat-opt" onclick="chatReply('Schedule a visit')">📅 Schedule Visit</button>
+        <button class="chat-opt" onclick="chatReply('Send smog guide')">📄 Free Smog Guide</button>
+      </div>
+      <div class="chat-inp-row">
+        <input class="chat-inp" id="chatInp" placeholder="Describe your pet's symptoms…" type="text">
+        <button class="chat-send" onclick="sendChat()">➤</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SPECIALITY ══════════ -->
+<section class="specs sec" id="speciality">
+  <div class="specs-head rv">
+    <div class="kicker center">Medical Excellence</div>
+    <h2 class="sh" style="text-align:center">Our <em>Specialities</em></h2>
+    <p class="body-txt" style="text-align:center;max-width:500px;margin:14px auto 0">World-class specialty medicine — delivered at home or at our East of Kailash clinic for complex cases. Every pawrent deserves access to the best.</p>
+  </div>
+  <div class="specs-grid">
+    <div class="spec-card rv d1"><span class="spec-icon">🫀</span><div class="spec-name">Cardiology</div><p class="spec-desc">Heart disease, echocardiography &amp; long-term cardiac management</p></div>
+    <div class="spec-card rv d2"><span class="spec-icon">🧠</span><div class="spec-name">Neurology</div><p class="spec-desc">Seizures, paralysis &amp; neurological rehabilitation</p></div>
+    <div class="spec-card rv d3"><span class="spec-icon">🦴</span><div class="spec-name">Orthopaedics</div><p class="spec-desc">TPLO surgery, hip dysplasia &amp; underwater treadmill physiotherapy</p></div>
+    <div class="spec-card rv d4"><span class="spec-icon">🔬</span><div class="spec-name">Oncology</div><p class="spec-desc">Cancer diagnosis, chemotherapy &amp; compassionate palliative care</p></div>
+    <div class="spec-card rv d5"><span class="spec-icon">🦷</span><div class="spec-name">Dentistry</div><p class="spec-desc">Professional cleaning, extractions &amp; oral surgery</p></div>
+    <div class="spec-card rv d1"><span class="spec-icon">👁️</span><div class="spec-name">Ophthalmology</div><p class="spec-desc">Cataracts, corneal ulcers, dry eye &amp; glaucoma</p></div>
+    <div class="spec-card rv d2"><span class="spec-icon">🐱</span><div class="spec-name">Feline Medicine</div><p class="spec-desc">CKD, hyperthyroidism, FIV/FeLV &amp; stress-free cat care</p></div>
+    <div class="spec-card rv d3"><span class="spec-icon">🍃</span><div class="spec-name">Dermatology</div><p class="spec-desc">Allergies, monsoon hot spots &amp; chronic skin management</p></div>
+    <div class="spec-card rv d4"><span class="spec-icon">🍽️</span><div class="spec-name">Nutrition</div><p class="spec-desc">Custom diet plans for obesity, kidney disease &amp; senior pets</p></div>
+    <div class="spec-card rv d5"><span class="spec-icon">🧬</span><div class="spec-name">Genetics</div><p class="spec-desc">DNA testing, hereditary disease screening &amp; ethical breeding</p></div>
+  </div>
+</section>
+
+<!-- ══════════ BLOG ══════════ -->
+<section class="blog sec" id="blog">
+  <div class="blog-head">
+    <div class="rv">
+      <div class="kicker">For Every Pawrent</div>
+      <h2 class="sh">The MaxPetZ <em>Knowledge Hub</em></h2>
+    </div>
+    <a href="#" class="link-arr rv d2">All Articles →</a>
+  </div>
+  <div class="blog-grid">
+    <div class="blog-card rv d1">
+      <div class="blog-thumb">🌫️</div>
+      <div class="blog-body">
+        <div class="blog-tags"><span class="btag">Delhi Smog</span><span class="btag">Brachycephalic</span><span class="btag">Emergency</span></div>
+        <div class="blog-title">Delhi's AQI Hit 450 Again — Here's Exactly What It Does to Your Pug's Lungs</div>
+        <p class="blog-exc">PM2.5 particles settle at ground level — exactly where your dog breathes. Flat-faced breeds are already structurally compromised. Every pawrent of a Pug, Bulldog or Shih Tzu must know these 5 warning signs.</p>
+        <div class="blog-meta">Dr. Meera Nair · 8 min read · Nov 2024</div>
+      </div>
+    </div>
+    <div class="blog-card rv d2">
+      <div class="blog-thumb">❄️</div>
+      <div class="blog-body">
+        <div class="blog-tags"><span class="btag">Winter</span><span class="btag">Joint Care</span></div>
+        <div class="blog-title">Why Your Golden Retriever Limps Every Winter Morning in Delhi</div>
+        <p class="blog-exc">Delhi's dry cold triggers arthritis flares in senior large breeds. A simple 3-step morning ritual can make a world of difference for your pawrent heart.</p>
+        <div class="blog-meta">Dr. Arjun Khanna · 6 min · Dec 2024</div>
+      </div>
+    </div>
+    <div class="blog-card rv d3">
+      <div class="blog-thumb">🐛</div>
+      <div class="blog-body">
+        <div class="blog-tags"><span class="btag">Monsoon</span><span class="btag">Parasites</span></div>
+        <div class="blog-title">Tick Fever is Deadly. Every Pawrent's Monsoon Calendar for South Delhi</div>
+        <p class="blog-exc">Delhi's monsoon creates perfect tick breeding conditions. Tick fever can kill within 48 hours of symptoms. Month-by-month protocol for pawrents inside.</p>
+        <div class="blog-meta">Dr. Sania Patel · 7 min · Jul 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section class="about sec" id="about">
+  <div class="about-visual rv-l">
+    <div class="about-bg-card">
+      <div class="about-big-emoji">🐾</div>
+      <div style="position:relative;z-index:1;text-align:center;padding:28px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2.5vw,1.45rem);font-weight:600;color:#fff;margin-bottom:8px">East of Kailash's Most Trusted Veterinary Home Service</div>
+        <div style="font-size:clamp(.74rem,1.2vw,.8rem);color:rgba(255,255,255,.52);line-height:1.7;max-width:220px;margin:auto">Clinic-grade equipment and expertise — zero compromise on quality, zero stress for you or your pet.</div>
+      </div>
+    </div>
+    <div class="about-float-card rv d4">
+      <div class="about-metric"><span class="cnt" data-to="70" data-s="+">0</span></div>
+      <div class="about-metric-lbl">Years of Pet Healthcare Excellence</div>
+      <div class="about-badges">
+        <div class="abadge">Since 1952</div>
+        <div class="abadge">Fear Free™</div>
+        <div class="abadge">South Delhi</div>
+      </div>
+    </div>
+  </div>
+  <div class="rv-r">
+    <div class="kicker">Our Philosophy</div>
+    <h2 class="sh" style="margin-bottom:14px">The Vision Behind<br><em>MaxPetZ</em></h2>
+    <p class="body-txt" style="margin-bottom:28px">We believe your pet deserves the same dedication as your own child. Our founders built MaxPetZ because they were tired of watching anxious animals in cold, sterile waiting rooms — and the helpless look on every pawrent's face. Every protocol we design starts with one question: <em style="color:var(--t7);font-style:italic">how does this feel for the pet?</em></p>
+    <div class="pillars">
+      <div class="pillar"><div class="pillar-ico">🏠</div><div><h4>Home First Philosophy</h4><p>Pets heal faster in their own space. We bring clinical excellence to your living room — so every pawrent can feel truly in control.</p></div></div>
+      <div class="pillar"><div class="pillar-ico">🧠</div><div><h4>Fear Free™ Certified</h4><p>Every vet on our team is certified in low-stress handling. Calmer pets, calmer pawrents — every single visit.</p></div></div>
+      <div class="pillar"><div class="pillar-ico">💎</div><div><h4>Radical Pricing Transparency</h4><p>No surprise bills. Every intervention is explained and priced clearly before it begins. Because trust is built one honest conversation at a time.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ LOCATION ══════════ -->
+<section class="location sec" id="location">
+  <div class="loc-inner rv-l">
+    <div class="kicker light">Find Us &amp; Reach Us</div>
+    <h2 class="sh white">We Come <em>To You</em></h2>
+    <div class="loc-details">
+      <div class="loc-item"><div class="loc-ico">📍</div><div class="loc-txt"><h4>Clinic Address</h4><p>C-42, East of Kailash, New Delhi — 110065</p></div></div>
+      <div class="loc-item"><div class="loc-ico">📞</div><div class="loc-txt"><h4>Phone &amp; WhatsApp</h4><p>844 844 9955 · Available 7 days a week</p></div></div>
+      <div class="loc-item"><div class="loc-ico">🕐</div><div class="loc-txt"><h4>Home Visit Hours</h4><p>Monday–Sunday · 8:00 AM – 8:00 PM</p></div></div>
+      <div class="loc-item"><div class="loc-ico">🗺️</div><div class="loc-txt"><h4>Service Areas</h4><p>East of Kailash · GK1 · GK2 · Hauz Khas · Lajpat Nagar · Defence Colony · Saket · Malviya Nagar</p></div></div>
+    </div>
+    <div class="loc-btns">
+      <a href="https://wa.me/918448449955" class="btn-wa">💬 WhatsApp Us</a>
+      <a href="#form" class="btn-outline-white bgl">📅 Book Online</a>
+    </div>
+  </div>
+  <div class="map-card rv-r d2">
+    <div class="map-pin">📍</div>
+    <div class="map-label">East of Kailash, New Delhi</div>
+    <div class="map-sub">South Delhi's most trusted home veterinary service since 1952</div>
+    <a href="https://maps.google.com/?q=East+of+Kailash,+New+Delhi" target="_blank" class="map-link">Open in Google Maps →</a>
+  </div>
+</section>
+
+<!-- ══════════ FORM ══════════ -->
+<section class="form-sec sec" id="form">
+  <div class="form-inner rv">
+    <div class="kicker light center" style="justify-content:center;margin-bottom:12px">Book Your Visit</div>
+    <h2 class="sh white" style="margin-bottom:10px">Book Your Fur-Baby's<br><em>Home Visit Today</em></h2>
+    <p class="form-lead">Fill in your details and our team will confirm your slot within 15 minutes via WhatsApp. Every pawrent deserves this kind of care — and it starts right here.</p>
+    <form class="form-grid" id="leadForm" onsubmit="submitForm(event)" novalidate>
+      <div class="fld">
+        <label>Your Name</label>
+        <input type="text" placeholder="Priya Malhotra" required>
+      </div>
+      <div class="fld">
+        <label>WhatsApp Number</label>
+        <input type="tel" placeholder="+91 844 844 9955" required>
+      </div>
+      <div class="fld">
+        <label>Pet's Name</label>
+        <input type="text" placeholder="Bella">
+      </div>
+      <div class="fld">
+        <label>Pet Type</label>
+        <select>
+          <option>🐶 Dog</option>
+          <option>🐱 Cat</option>
+          <option>🐰 Rabbit</option>
+          <option>🐦 Bird</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label>Your Area</label>
+        <select>
+          <option>East of Kailash</option>
+          <option>Greater Kailash 1</option>
+          <option>Greater Kailash 2</option>
+          <option>Hauz Khas</option>
+          <option>Lajpat Nagar</option>
+          <option>Defence Colony</option>
+          <option>Saket</option>
+          <option>Malviya Nagar</option>
+          <option>Other South Delhi</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label>Service Needed</label>
+        <select>
+          <option>General Consultation</option>
+          <option>Vaccination</option>
+          <option>Emergency Visit</option>
+          <option>Diagnostics</option>
+          <option>Grooming</option>
+          <option>Physiotherapy</option>
+          <option>Not Sure — Need Advice</option>
+        </select>
+      </div>
+      <button type="submit" class="form-submit">
+        🐾 <span>Confirm My Home Visit Slot</span>
+      </button>
+      <div class="form-privacy">🔒 Your details are safe. We only use them to confirm your visit — no spam, ever.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand-desc-col">
+      <div class="footer-brand-logo">
+        <div class="nav-logo-cross" style="width:22px;height:22px;font-size:.82rem">+</div>
+        Max<em>PetZ</em>
+      </div>
+      <p class="footer-desc">South Delhi's most trusted home veterinary service — pioneering pet healthcare since 1952. Expert care for your fur-baby in East of Kailash, GK1, GK2 &amp; Hauz Khas. Every pawrent deserves this level of care.</p>
+    </div>
+    <div class="fcol">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#">→ Home Consultation</a></li>
+        <li><a href="#">→ Vaccination</a></li>
+        <li><a href="#">→ Diagnostics</a></li>
+        <li><a href="#">→ Grooming</a></li>
+        <li><a href="#">→ Physiotherapy</a></li>
+        <li><a href="#">→ Emergency Care</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Specialities</h5>
+      <ul>
+        <li><a href="#">→ Cardiology</a></li>
+        <li><a href="#">→ Neurology</a></li>
+        <li><a href="#">→ Orthopaedics</a></li>
+        <li><a href="#">→ Oncology</a></li>
+        <li><a href="#">→ Dermatology</a></li>
+        <li><a href="#">→ Feline Medicine</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Connect</h5>
+      <ul>
+        <li><a href="#">→ About Us</a></li>
+        <li><a href="#">→ For Pawrents: Blog</a></li>
+        <li><a href="#">→ Our Doctors</a></li>
+        <li><a href="#">→ For Referring Vets</a></li>
+        <li><a href="#">→ WhatsApp</a></li>
+        <li><a href="#">→ Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 MaxPetZ · <a href="https://maxpetz.com">maxpetz.com</a> · 844 844 9955</span>
+    <span>Pioneers in Pet Healthcare Since 1952 🐾</span>
+  </div>
+</footer>
+
+<!-- ══════════ SCRIPTS ══════════ -->
+<script>
+/* ─ Cursor (desktop only) ─ */
+const isTouch=()=>window.matchMedia('(pointer:coarse)').matches;
+const cd=document.getElementById('cur-dot'),cr=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+if(!isTouch()){
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cd.style.left=mx+'px';cd.style.top=my+'px';
+  });
+  (function ar(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(ar);})();
+  document.querySelectorAll('a,button,.svc-card,.rev-card,.doc-card,.spec-card,.blog-card,.magnet,.pillar').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('cur-big'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('cur-big'));
+  });
+}
+
+/* ─ Scroll progress + Nav ─ */
+const prog=document.getElementById('sprog'),nav=document.getElementById('nav');
+let lastY=0;
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY,h=document.body.scrollHeight-innerHeight;
+  prog.style.width=(y/h*100)+'%';
+  nav.classList.toggle('scrolled',y>60);
+  lastY=y;
+},{passive:true});
+
+/* ─ Mobile menu ─ */
+const ham=document.getElementById('ham'),menu=document.getElementById('mobMenu'),mc=document.getElementById('mobClose');
+function openMenu(){menu.style.display='flex';requestAnimationFrame(()=>menu.classList.add('open'));document.body.style.overflow='hidden';}
+function closeMenu(){menu.classList.remove('open');setTimeout(()=>{menu.style.display='none';},350);document.body.style.overflow='';}
+ham.addEventListener('click',openMenu);
+mc.addEventListener('click',closeMenu);
+document.querySelectorAll('.mob-link,.mob-menu-cta').forEach(a=>a.addEventListener('click',closeMenu));
+
+/* ─ Marquee ─ */
+const words=['Fear Free™ Certified','East of Kailash','4.9★ Google Rated','Home Visits 7 Days','GK1 & GK2','Emergency Care','Hauz Khas','2,400+ Pets Treated','Smog Specialists','Since 1952','Transparent Pricing','Trusted by Pawrents'];
+const mt=document.getElementById('mtrack');
+let mh='';
+for(let i=0;i<3;i++)words.forEach(w=>{mh+=`<span class="marquee-item">${w}<span class="marquee-sep"></span></span>`;});
+mt.innerHTML=mh;
+
+/* ─ Reveal on scroll ─ */
+const revObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');revObs.unobserve(e.target);}});
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>revObs.observe(el));
+
+/* Card stagger */
+const cardObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';cardObs.unobserve(e.target);}
+  });
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.svc-card,.rev-card,.doc-card,.spec-card,.blog-card,.magnet,.pillar').forEach((el,i)=>{
+  el.style.opacity='0';el.style.transform='translateY(32px)';
+  el.style.transition=`opacity .75s ${(i%6)*.07}s cubic-bezier(.16,1,.3,1),transform .75s ${(i%6)*.07}s cubic-bezier(.16,1,.3,1)`;
+  cardObs.observe(el);
+});
+
+/* ─ Count up ─ */
+function countUp(el){
+  const to=+el.dataset.to,s=el.dataset.s||'',d=1800;
+  let start=null;
+  (function step(ts){
+    if(!start)start=ts;
+    const p=Math.min((ts-start)/d,1),ease=1-Math.pow(1-p,4);
+    el.textContent=Math.floor(ease*to)+s;
+    if(p<1)requestAnimationFrame(step);
+  })(performance.now());
+}
+const cntObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.cnt').forEach(countUp);cntObs.unobserve(e.target);}});
+},{threshold:.4});
+document.querySelectorAll('.hero-stats,.about-float-card').forEach(el=>cntObs.observe(el));
+
+/* ─ Magnetic buttons ─ */
+if(!isTouch()){
+  document.querySelectorAll('.mag').forEach(el=>{
+    el.addEventListener('mousemove',e=>{
+      const r=el.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.22,y=(e.clientY-r.top-r.height/2)*.22;
+      el.style.transform=`translate(${x}px,${y}px)`;
+    });
+    el.addEventListener('mouseleave',()=>{el.style.transform='';});
+  });
+}
+
+/* ─ Hero card parallax ─ */
+if(!isTouch()){
+  document.addEventListener('mousemove',e=>{
+    const hc=document.getElementById('hcards');if(!hc)return;
+    const x=(e.clientX/innerWidth-.5)*16,y=(e.clientY/innerHeight-.5)*11;
+    hc.style.transform=`perspective(900px) rotateY(${x}deg) rotateX(${-y}deg)`;
+  });
+}
+
+/* ─ Chatbot ─ */
+const chatReplies={
+  'Book emergency visit':'🚨 Connecting you to our emergency line right now. Please share your exact location and I\'ll have a vet dispatched immediately. Don\'t panic, Pawrent — we\'ve got this.',
+  'Schedule a visit':'📅 Of course! What time works best — morning (9–12), afternoon (12–4), or evening (4–8)? And which South Delhi area are you in?',
+  'Send smog guide':'📄 Sending the Smog Survival Guide to your WhatsApp right now — every pawrent needs this. Can I get your number?'
+};
+function chatReply(txt){
+  const b=document.getElementById('chatMsgs');
+  const u=document.createElement('div');u.className='chat-msg usr';u.textContent=txt;
+  b.appendChild(u);b.scrollTop=b.scrollHeight;
+  setTimeout(()=>{
+    const m=document.createElement('div');m.className='chat-msg bot';
+    m.textContent=chatReplies[txt]||'Got it, Pawrent! Let me connect you with our team right away. Can I get your WhatsApp number so we can confirm everything?';
+    b.appendChild(m);b.scrollTop=b.scrollHeight;
+  },700);
+}
+function sendChat(){
+  const i=document.getElementById('chatInp');
+  if(!i.value.trim())return;
+  chatReply(i.value);i.value='';
+}
+document.getElementById('chatInp').addEventListener('keypress',e=>{if(e.key==='Enter')sendChat();});
+
+/* ─ Form submit ─ */
+function submitForm(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.form-submit');
+  btn.innerHTML='✅ Booking Confirmed! We\'ll WhatsApp you within 15 mins 🐾';
+  btn.style.background='linear-gradient(135deg,#4ade80,#16a34a)';
+  btn.style.color='#fff';
+  setTimeout(()=>{
+    btn.innerHTML='🐾 <span>Confirm My Home Visit Slot</span>';
+    btn.style.background='';btn.style.color='';
+  },5000);
+}
+</script>
+</body>
+</html>
